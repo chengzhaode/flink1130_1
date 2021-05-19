@@ -42,7 +42,7 @@ public class Flink14_Window_Over_Table {
                 OverWindow w = Over.partitionBy($("id")).orderBy($("ts")).preceding(UNBOUNDED_ROW).as("w");
 //                OverWindow w = Over.partitionBy($("id")).orderBy($("ts")).preceding(rowInterval(1L)).as("w");  // 当前行与上一行求和
 //        OverWindow w = Over.partitionBy($("id")).orderBy($("ts")).preceding(lit(2).second()).as("w");  // 当前行与上一行求和
-//        OverWindow w = Over.partitionBy($("id")).orderBy($("ts")).preceding(UNBOUNDED_RANGE).as("w");  // 当前行与上一行求和
+//        OverWindow w = Over.partitionBy($("id")).orderBy($("ts")).preceding(UNBOUNDED_RANGE).as("w");  // 时间无界求和
         table
             .window(w)
             .select($("id"), $("ts"), $("vc").sum().over($("w")))
